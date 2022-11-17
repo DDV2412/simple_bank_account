@@ -1,0 +1,35 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "REST API",
+    "description": ""
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "info": {
+      "title": "Simple Bank Account",
+      "description": "Simple Bank Account"
+    },
+    "host": "localhost:8090",
+    "definitions": {
+      "customer": {},
+      "account": {},
+      "transaction": {}
+    },
+    "schemes": [
+      "http"
+    ],
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "Enter your bearer token in the format **Bearer &lt;token>**"
+    }
+  },
+  "paths": {}
+}
