@@ -1,11 +1,11 @@
-import { Router } from "express";
+import express from "express";
 import Customer from "../controllers/customer";
 import Transaction from "../controllers/transaction";
 import Balance from "../controllers/account";
 import authentication from "../middleware/auth";
 
-class Routers {
-  route: Router = Router();
+class Router {
+  route: express.Router = express.Router();
 
   constructor() {
     this.route.post("/register", Customer.register);
@@ -16,4 +16,4 @@ class Routers {
   }
 }
 
-export default new Routers().route;
+export default new Router().route;

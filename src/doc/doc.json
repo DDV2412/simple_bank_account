@@ -1,29 +1,16 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
-    "title": "REST API",
-    "description": ""
+    "title": "Simple Bank Account",
+    "description": "Simple Bank Account",
+    "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "localhost:8090",
   "basePath": "/",
   "schemes": [
     "http"
   ],
   "securityDefinitions": {
-    "info": {
-      "title": "Simple Bank Account",
-      "description": "Simple Bank Account"
-    },
-    "host": "localhost:8090",
-    "definitions": {
-      "customer": {},
-      "account": {},
-      "transaction": {}
-    },
-    "schemes": [
-      "http"
-    ],
     "Bearer": {
       "type": "apiKey",
       "name": "Authorization",
@@ -31,5 +18,610 @@
       "description": "Enter your bearer token in the format **Bearer &lt;token>**"
     }
   },
-  "paths": {}
+  "paths": {
+    "/api/register": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Authentication register",
+        "description": "Authentication register",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Authentication register",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userName": {
+                  "type": "string",
+                  "example": "admin2412"
+                },
+                "fullName": {
+                  "type": "string",
+                  "example": "Manager Admin"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "admin@mail.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "Admin2346#"
+                },
+                "address": {
+                  "type": "string",
+                  "example": "New York"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully saved new customer",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": ""
+                },
+                "payload": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "ab269a5a-a8ab-45c2-a079-32dfe174241b"
+                    },
+                    "userName": {
+                      "type": "string",
+                      "example": "admin2412"
+                    },
+                    "accountId": {
+                      "type": "string",
+                      "example": "b7c2c082-f0b4-4289-b744-e0a224b68642"
+                    },
+                    "balance": {
+                      "type": "number",
+                      "example": 4383401.762220003
+                    },
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFiMjY5YTVhLWE4YWItNDVjMi1hMDc5LTMyZGZlMTc0MjQxYiIsInVzZXJOYW1lIjoiYWRtaW4yNDEyIiwiYWNjb3VudElkIjoiYjdjMmMwODItZjBiNC00Mjg5LWI3NDQtZTBhMjI0YjY4NjQyIiwiYmFsZW5jZSI6NDM4MzQwMS43NjIyMjAwMDMsImlhdCI6MTY2ODY2MzQ3NCwiZXhwIjoxNjY4NjY3MDc0fQ.HfDeuSg67XLHBsX0fjhOuUac43LmJ6Mp-N9uQ-kpEPc"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Register error.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Username or email not avalaible"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Authentication Login",
+        "description": "Authentication Login",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Authentication Login",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userName": {
+                  "type": "string",
+                  "example": "admin2412"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "Admin2346#"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully saved new customer",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": ""
+                },
+                "payload": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "ab269a5a-a8ab-45c2-a079-32dfe174241b"
+                    },
+                    "userName": {
+                      "type": "string",
+                      "example": "admin2412"
+                    },
+                    "accountId": {
+                      "type": "string",
+                      "example": "b7c2c082-f0b4-4289-b744-e0a224b68642"
+                    },
+                    "balance": {
+                      "type": "number",
+                      "example": 4383401.762220003
+                    },
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFiMjY5YTVhLWE4YWItNDVjMi1hMDc5LTMyZGZlMTc0MjQxYiIsInVzZXJOYW1lIjoiYWRtaW4yNDEyIiwiYWNjb3VudElkIjoiYjdjMmMwODItZjBiNC00Mjg5LWI3NDQtZTBhMjI0YjY4NjQyIiwiYmFsZW5jZSI6NDM4MzQwMS43NjIyMjAwMDMsImlhdCI6MTY2ODY2MzQ3NCwiZXhwIjoxNjY4NjY3MDc0fQ.HfDeuSg67XLHBsX0fjhOuUac43LmJ6Mp-N9uQ-kpEPc"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Register error.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Username or password not match"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/deposit": {
+      "post": {
+        "tags": [
+          "Transaction"
+        ],
+        "summary": "Transaction Deposit",
+        "description": "Deposit",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Deposit",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "type": "number",
+                  "example": 50033400.44222
+                },
+                "type": {
+                  "type": "string",
+                  "example": "deposits"
+                },
+                "receiverName": {
+                  "type": "string",
+                  "example": "Manager Admin"
+                },
+                "receiverAccount": {
+                  "type": "string",
+                  "example": "b7c2c082-f0b4-4289-b744-e0a224b68642"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create Category",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": ""
+                },
+                "payload": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "99d35255-9799-46b1-b948-07083894a1e5"
+                    },
+                    "customerId": {
+                      "type": "string",
+                      "example": "ab269a5a-a8ab-45c2-a079-32dfe174241b"
+                    },
+                    "amount": {
+                      "type": "number",
+                      "example": 50000
+                    },
+                    "currentBalance": {
+                      "type": "number",
+                      "example": 50000
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Deposit Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": ""
+                },
+                "payload": {}
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Deposit Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Internal server error"
+                },
+                "payload": {}
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/api/withdrawal": {
+      "post": {
+        "tags": [
+          "Transaction"
+        ],
+        "summary": "Transaction Deposit",
+        "description": "Deposit",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Deposit",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "type": "number",
+                  "example": 50000
+                },
+                "type": {
+                  "type": "string",
+                  "example": "withdrawals"
+                },
+                "receiverName": {
+                  "type": "string",
+                  "example": "Manager Admin"
+                },
+                "receiverAccount": {
+                  "type": "string",
+                  "example": "b7c2c082-f0b4-4289-b744-e0a224b68642"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create Category",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": ""
+                },
+                "payload": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "99d35255-9799-46b1-b948-07083894a1e5"
+                    },
+                    "customerId": {
+                      "type": "string",
+                      "example": "ab269a5a-a8ab-45c2-a079-32dfe174241b"
+                    },
+                    "amount": {
+                      "type": "number",
+                      "example": 50000
+                    },
+                    "currentBalance": {
+                      "type": "number",
+                      "example": 50000
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Deposit Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Your account balance is insufficient"
+                },
+                "payload": {}
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Deposit Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Internal server error"
+                },
+                "payload": {}
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/api/balance": {
+      "get": {
+        "tags": [
+          "Balance"
+        ],
+        "summary": "Balance Checking",
+        "description": "Balance Checking",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Category List",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": ""
+                },
+                "payload": {
+                  "type": "object",
+                  "properties": {
+                    "customerId": {
+                      "type": "string",
+                      "example": "ab269a5a-a8ab-45c2-a079-32dfe174241b"
+                    },
+                    "currentBalance": {
+                      "type": "number",
+                      "example": 4383401.762220003
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Deposit Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Internal server error"
+                },
+                "payload": {}
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "customer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "function"
+        },
+        "userName": {
+          "type": "function"
+        },
+        "fullName": {
+          "type": "function"
+        },
+        "email": {
+          "type": "function"
+        },
+        "password": {
+          "type": "function"
+        },
+        "address": {
+          "type": "function"
+        },
+        "createdAt": {
+          "type": "function"
+        },
+        "updatedAt": {
+          "type": "function"
+        }
+      }
+    },
+    "account": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "function"
+        },
+        "customerId": {
+          "type": "function"
+        },
+        "accType": {
+          "type": "function"
+        },
+        "balance": {
+          "type": "function"
+        },
+        "createdAt": {
+          "type": "function"
+        },
+        "updatedAt": {
+          "type": "function"
+        }
+      }
+    },
+    "transaction": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "function"
+        },
+        "customerId": {
+          "type": "function"
+        },
+        "amount": {
+          "type": "function"
+        },
+        "type": {
+          "type": "function"
+        },
+        "receiverName": {
+          "type": "function"
+        },
+        "receiverAccount": {
+          "type": "function"
+        },
+        "createdAt": {
+          "type": "function"
+        },
+        "updatedAt": {
+          "type": "function"
+        }
+      }
+    }
+  }
 }

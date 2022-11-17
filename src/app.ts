@@ -2,13 +2,14 @@ import express, { Express } from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 const { sequelize } = require("./models");
-import router from "./router";
+import routers from "./router";
 import AccountUseCase from "./use_cases/account";
 import CustomerUseCase from "./use_cases/customer";
 import TransactionUseCase from "./use_cases/transaction";
 import CustomerRepo from "./repository/customer";
 import AccountRepo from "./repository/account";
 import TransactionRepo from "./repository/transaction";
+import errorMiddleWare from "./middleware/errorMiddleware";
 
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./doc/doc.json");
@@ -55,6 +56,8 @@ class Application {
       next();
     });
 
+    this.app.use("/api", routers);
+
     this.app.use(
       "/api/docs",
       swaggerUi.serve,
@@ -63,7 +66,7 @@ class Application {
       })
     );
 
-    this.app.use("/api", router);
+    this.app.use(errorMiddleWare);
   }
 }
 
