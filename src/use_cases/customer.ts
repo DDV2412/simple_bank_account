@@ -52,7 +52,7 @@ class CustomerUseCase {
       id: result["id"],
       userName: result["userName"],
       accountId: result["account"]["id"],
-      balence: result["account"]["balance"],
+      balance: result["account"]["balance"],
     };
 
     const token = this.generateToken(payload);

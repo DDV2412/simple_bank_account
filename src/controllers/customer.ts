@@ -149,7 +149,7 @@ export default {
       id: customer?.payload.id,
       userName: customer?.payload.userName,
       accountId: customer.payload.accountId,
-      balance: customer.payload.balence,
+      balance: customer.payload.balance,
       token: customer?.token,
     });
 
